@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>사다리 타기</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 30px; }
+    input, button { margin: 10px; padding: 10px; font-size: 16px; }
+    #result { margin-top: 20px; font-size: 24px; font-weight: bold; color: #2c3e50; }
+  </style>
+</head>
+<body>
+
+  <h1>🎲 사다리 타기</h1>
+  
+  <label>참여자 이름 (쉼표로 구분):</label><br>
+  <input type="text" id="names" placeholder="예: 철수,영희,민수"><br>
+
+  <label>결과 항목 (쉼표로 구분):</label><br>
+  <input type="text" id="goals" placeholder="예: 아이스크림, 벌칙, 커피"><br>
+
+  <button onclick="runLadder()">시작!</button>
+
+  <div id="result"></div>
+
+  <script>
+    function runLadder() {
+      const names = document.getElementById("names").value.split(",").map(n => n.trim());
+      const goals = document.getElementById("goals").value.split(",").map(g => g.trim());
+
+      if (names.length !== goals.length) {
+        document.getElementById("result").innerText = "⚠️ 인원 수와 결과 수가 같아야 해요!";
+        return;
+      }
+
+      // 결과를 섞기
+      const shuffledGoals = [...goals].sort(() => Math.random() - 0.5);
+
+      let output = "";
+      for (let i = 0; i < names.length; i++) {
+        output += `${names[i]} → ${shuffledGoals[i]}<br>`;
+      }
+
+      document.getElementById("result").innerHTML = output;
+    }
+  </script>
+
+</body>
+</html>
