@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 그룹 뽑기</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        .input-section {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        textarea {
+            width: calc(100% - 20px);
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 100px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #3e8e41;
+            transform: translateY(0);
+        }
+
+        .results-section {
+            margin-top: 30px;
+            text-align: left;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .results-section h2 {
+            color: #2196F3;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            text-align: center;
+        }
+
+        .group {
+            margin-bottom: 20px;
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #c8e6c9;
+        }
+
+        .group h3 {
+            color: #388E3C;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            text-align: center;
+        }
+
+        .group ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .group ul li {
+            background-color: #dcedc8;
+            margin: 5px 0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block; /* 한 줄에 여러 개 표시 */
+            margin-right: 8px; /* 항목 간 간격 */
+            margin-left: 8px;
+        }
+
+        .error-message {
+            color: #D32F2F;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>랜덤 그룹 뽑기</h1>
+
+        <div class="input-section">
+            <label for="members">참가자 이름을 쉼표(,)로 구분하여 입력하세요:</label>
+            <textarea id="members" placeholder="예: 김철수, 이영희, 박지민, 최수현"></textarea>
+            <button onclick="divideIntoGroups()">그룹 나누기</button>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <div class="results-section">
+            <h2>뽑기 결과</h2>
+            <div id="group1" class="group">
+                <h3>그룹 1</h3>
+                <ul></ul>
+            </div>
+            <div id="group2" class="group">
+                <h3>그룹 2</h3>
+                <ul></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // 요소 교환
+            }
+            return array;
+        }
+
+        function divideIntoGroups() {
+            const membersInput = document.getElementById('members').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const group1List = document.querySelector('#group1 ul');
+            const group2List = document.querySelector('#group2 ul');
+
+            // 기존 결과 초기화
+            group1List.innerHTML = '';
+            group2List.innerHTML = '';
+            errorMessage.textContent = '';
+
+            // 쉼표로 구분하여 배열 생성, 각 멤버의 앞뒤 공백 제거
+            let members = membersInput.split(',').map(member => member.trim()).filter(member => member !== '');
+
+            if (members.length === 0) {
+                errorMessage.textContent = '참가자 이름을 입력해주세요.';
+                return;
+            }
+
+            if (members.length < 2) {
+                errorMessage.textContent = '최소 2명 이상의 참가자가 필요합니다.';
+                return;
+            }
+
+            // 배열 섞기
+            members = shuffleArray(members);
+
+            const group1 = [];
+            const group2 = [];
+
+            // 두 그룹으로 나누기
+            for (let i = 0; i < members.length; i++) {
+                if (i % 2 === 0) {
+                    group1.push(members[i]);
+                } else {
+                    group2.push(members[i]);
+                }
+            }
+
+            // 결과 표시
+            group1.forEach(member => {
+                const li = document.createElement('li');
+                li.textContent = member;
+                group1List.appendChild(li);
+            });
+
+            group2.forEach(member => {
+                const li = document.createElement('li');
+                li.textContent = member;
+                group2List.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
