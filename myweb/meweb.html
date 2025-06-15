@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>원다영 포트폴리오</title>
+  <style>
+    /* 색상 변수 설정 */
+    :root {
+      --primary-color: #2c5f2d;
+      --secondary-color: #4c9a2a;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b3a2d;
+      --accent-light: #e1f0e9;
+    }
+
+    /* 기본 리셋 */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Noto Sans KR', sans-serif; 
+      color: var(--text-dark); 
+      background: var(--bg-light);
+      scroll-behavior: smooth;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* Header */
+    header { 
+      background: var(--primary-color); 
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+    nav { display: flex; justify-content: space-between; align-items: center; height: 60px; }
+    .logo { font-size: 1.5rem; font-weight: bold; color: #fff; }
+    .nav-links { list-style: none; display: flex; gap: 1.5rem; }
+    .nav-links li a { font-size: 0.95rem; color: #fff; padding: 0.5rem 1rem; transition: background 0.3s, color 0.3s; border-radius: 0.25rem; }
+    .nav-links li a:hover { background: var(--secondary-color); }
+
+    /* Hero 섹션 */
+    .hero {
+      margin-top: 60px;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      padding: 1rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      width: 100%; max-width: 1200px;
+    }
+    .hero-grid a img {
+      width: 100%; height: auto;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .hero-grid a img:hover { transform: translateY(-5px) scale(1.02); }
+
+    /* About 섹션 */
+    .about { padding: 4rem 0; background: var(--bg-light); }
+    .about .inner { max-width: 800px; margin: 0 auto; }
+    .about-text { text-align: center; }
+    .about-text h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--primary-color); }
+    .about-text p { font-size: 1rem; color: var(--text-dark); }
+
+    /* Abilities 섹션 */
+    .abilities { padding: 4rem 0; }
+    .abilities h2 { text-align: center; margin-bottom: 2rem; color: var(--primary-color); }
+    .abilities-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+    }
+    .abilities-list li {
+      background: #fff;
+      border: 2px solid var(--secondary-color);
+      color: var(--secondary-color);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+    .abilities-list li:hover {
+      background: var(--secondary-color);
+      color: #fff;
+    }
+
+    /* Projects 섹션 */
+    .projects { padding: 4rem 0; background: var(--bg-light); }
+    .projects h2 { text-align: center; margin-bottom: 2rem; color: var(--primary-color); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .card {
+      background: #fff;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover { transform: translateY(-8px); }
+    .card img { width: 100%; height: 180px; object-fit: cover; }
+    .card-content { padding: 1.5rem; }
+    .card-content h3 { margin-bottom: 0.75rem; font-size: 1.3rem; color: var(--text-dark); }
+    .card-content p { font-size: 0.95rem; color: var(--text-dark); line-height: 1.4; }
+    .card-content a {
+      display: inline-block; margin-top: 1rem; font-size: 0.95rem;
+      color: var(--primary-color); border-bottom: 2px solid var(--primary-color);
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .card-content a:hover {
+      color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+
+    /* Contact 섹션 */
+    .contact { padding: 4rem 0; }
+    .contact h2 { text-align: center; margin-bottom: 2rem; color: var(--primary-color); }
+    .contact-form { width: 100%; max-width: 500px; margin: 0 auto; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 0.75rem; margin-bottom: 1rem;
+      border: 2px solid var(--secondary-color); border-radius: 0.5rem;
+      background: #fff; color: var(--text-dark);
+      transition: border-color 0.3s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      outline: none; border-color: var(--primary-color);
+    }
+    .contact-form button {
+      width: 100%; padding: 0.75rem; border: none;
+      background: var(--secondary-color); color: #fff;
+      font-size: 1rem; font-weight: 600; border-radius: 0.5rem;
+      cursor: pointer; transition: background 0.3s;
+    }
+    .contact-form button:hover { background: var(--primary-color); }
+
+    /* Footer */
+    footer { background: var(--primary-color); color: #fff; padding: 2rem 0; text-align: center; }
+    footer small { display: block; margin-top: 1rem; font-size: 0.8rem; }  
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">원다영</div>
+        <ul class="nav-links">
+          <li><a href="#about">소개</a></li>
+          <li><a href="#abilities">능력</a></li>
+          <li><a href="#projects">프로젝트</a></li>
+          <li><a href="#contact">연락</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <a href="#about"><img src="포폴 배너.png" alt="배너 이미지 1"></a>
+      <a href="#about"><img src="포폴배너 앱디자인-01.jpg" alt="배너 이미지 2"></a>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container inner">
+      <div class="about-text">
+        <h2>소개</h2>
+        <p>콘텐츠 기획부터 디자인까지, 모든 과정을 설계하는 콘텐츠 디자이너입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="abilities" class="abilities">
+    <div class="container">
+      <h2>능력</h2>
+      <ul class="abilities-list">
+        <li>기획</li>
+        <li>디자인</li>
+        <li>편집</li>
+        <li>코딩</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2>프로젝트</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="project1.jpg" alt="프로젝트 1">
+          <div class="card-content">
+            <h3>프로젝트 제목 1</h3>
+            <p>프로젝트 설명을 간략히 작성합니다.</p>
+            <a href="#">자세히 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>연락하기</h2>
+      <form class="contact-form" action="#" method="post">
+        <input type="text" name="name" placeholder="이름" required>
+        <input type="email" name="email" placeholder="이메일" required>
+        <textarea name="message" rows="5" placeholder="메시지" required></textarea>
+        <button type="submit">전송하기</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      &copy; 2025 원다영. All Rights Reserved.
+      <small>Built with ❤️</small>
+    </div>
+  </footer>
+</body>
+</html> 
