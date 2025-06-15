@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>원다영 포트폴리오</title>
+  <style>
+    :root {
+      --primary-color: #2c5f2d;
+      --secondary-color: #4c9a2a;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b3a2d;
+      --accent-light: #e1f0e9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    header {
+      background: var(--primary-color);
+      position: fixed;
+      top: 0; width: 100%;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .container {
+      width: 90%; max-width: 1200px;
+      margin: 0 auto;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 60px;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav-links li a {
+      font-size: 0.95rem;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      transition: background 0.3s;
+    }
+    .nav-links li a:hover {
+      background: var(--secondary-color);
+    }
+
+    .hero {
+      margin-top: 60px;
+      padding: 2rem 1rem;
+      background: var(--accent-light);
+    }
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 600px;
+    }
+    .hero-left img, .hero-right a img {
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .hero-right a {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .hero-right {
+        flex-direction: row;
+        gap: 1rem;
+      }
+      .hero-right a {
+        flex: 1;
+        height: 200px;
+      }
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+    .about .inner {
+      max-width: 800px;
+      margin: 3rem auto 0;
+      text-align: center;
+    }
+    .about h2, .abilities h2, .projects h2, .contact h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--primary-color);
+    }
+
+    .abilities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      list-style: none;
+    }
+    .abilities-list li a {
+      display: block;
+      background: #fff;
+      border: 2px solid var(--secondary-color);
+      color: var(--secondary-color);
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+    .abilities-list li a:hover {
+      background: var(--secondary-color);
+      color: #fff;
+    }
+
+    .projects .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .contact-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 2px solid var(--secondary-color);
+      border-radius: 0.5rem;
+      background: #fff;
+    }
+    .contact-form button {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--secondary-color);
+      color: #fff;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .contact-form button:hover {
+      background: var(--primary-color);
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    footer small {
+      margin-top: 0.5rem;
+      display: block;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">원다영</div>
+        <ul class="nav-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="#abilities">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-layout">
+      <div class="hero-left">
+        <a href="project-astro.html"><img src="1.jpg" alt="메인 큰 배너 이미지"></a>
+      </div>
+      <div class="hero-right">
+        <a href="project-moneygame.html"><img src="포폴 배너.png" alt="돈모으자 GO! 배너 이미지"></a>
+        <a href="project-appdesign.html"><img src="포폴배너 앱디자인-01.jpg" alt="앱 디자인 배너 이미지"></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="abilities" class="abilities">
+    <div class="container">
+      <h2>Skills</h2>
+      <ul class="abilities-list">
+        <li><a href="skill-planning.html">기획</a></li>
+        <li><a href="skill-design.html">디자인</a></li>
+        <li><a href="skill-editing.html">편집</a></li>
+        <li><a href="skill-coding.html">코딩</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="grid">
+        <div class="card"><img src="5.png" alt=""><div class="card-content"><h3>로고 디자인</h3><p>콘텐츠 철학을 담은 심플하고 직관적인 로고 디자인입니다.</p></div></div>
+        <div class="card"><img src="2.jpg" alt=""><div class="card-content"><h3>일러스트 캐릭터 드로잉</h3><p>강렬한 배경과 감정을 활용한 인물화입니다.</p></div></div>
+        <div class="card"><img src="포폴 어플-21.jpg" alt=""><div class="card-content"><h3>앱 콘텐츠 디자인</h3><p>업사이클링 중심 앱의 UI 및 콘텐츠 구성입니다.</p></div></div>
+        <div class="card"><img src="로고 캐디 아웃박스 수정_대지 1-02.jpg" alt=""><div class="card-content"><h3>캐릭터 디자인</h3><p>제품 성격을 살린 아웃박스 일러스트입니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <form class="contact-form">
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="email" name="email" placeholder="Email" required />
+        <textarea name="message" rows="5" placeholder="Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2025 원다영. All Rights Reserved.
+      <small>Built with ❤️</small>
+    </div>
+  </footer>
+</body>
+</html>
+
