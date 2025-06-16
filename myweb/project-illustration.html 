@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>일러스트 캐릭터 드로잉</title>
+  <style>
+    body { font-family: 'Noto Sans KR', sans-serif; margin: 0; background: #f0f7f4; color: #1b3a2d; }
+    header { background: #2c5f2d; color: white; padding: 1.5rem; text-align: center; }
+    main { max-width: 960px; margin: 2rem auto; padding: 1rem; }
+    img { width: 100%; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    p { font-size: 1.1rem; margin-top: 2rem; line-height: 1.8; color: #444; }
+    a { color: #2c5f2d; text-decoration: underline; display: inline-block; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <header><h1>일러스트 캐릭터 드로잉</h1></header>
+  <main>
+    <img src="2.jpg" alt="일러스트 캐릭터 이미지">
+    <p>강렬한 배경과 감정을 담아낸 인물 일러스트입니다. 감정선을 강조하는 구도와 색채 구성을 통해 몰입감을 유도했습니다.</p>
+    <a href="index.html#projects">← 프로젝트로 돌아가기</a>
+  </main>
+</body>
+</html>
