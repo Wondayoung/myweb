@@ -3,19 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <title>Contact | 원다영 포트폴리오</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --primary-color: #2c5f2d;
+      --secondary-color: #4c9a2a;
+      --bg-light: #f0f7f4;
+      --text-dark: #1b3a2d;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      background: #f0f7f4;
-      color: #1b3a2d;
+      background: var(--bg-light);
+      color: var(--text-dark);
       margin: 0;
       padding: 0;
     }
 
     header {
-      background: #2c5f2d;
+      background: var(--primary-color);
       color: white;
-      padding: 1.5rem;
+      padding: 2rem 1rem;
       text-align: center;
     }
 
@@ -23,39 +36,96 @@
       max-width: 800px;
       margin: 3rem auto;
       padding: 2rem;
-      background: white;
+      background: var(--white);
       border-radius: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
     }
 
     h2 {
       font-size: 2rem;
-      color: #2c5f2d;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
     }
 
     .info-box {
       background: #e1f0e9;
       padding: 1.5rem;
-      border-left: 4px solid #4c9a2a;
+      border-left: 5px solid var(--secondary-color);
       border-radius: 0.5rem;
       font-size: 1rem;
-      margin-top: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .info-box a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .info-box a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-family: 'Noto Sans KR', sans-serif;
+      transition: border 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--secondary-color);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    button {
+      background: var(--primary-color);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--secondary-color);
     }
 
     a.button {
       display: inline-block;
       margin-top: 2rem;
-      background: #4c9a2a;
+      background: var(--secondary-color);
       color: white;
       padding: 0.75rem 1.5rem;
       text-decoration: none;
       font-weight: bold;
       border-radius: 0.5rem;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
 
     a.button:hover {
-      background: #2c5f2d;
+      background: var(--primary-color);
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -68,8 +138,17 @@
     <div class="info-box">
       <p><strong>이메일:</strong> <a href="mailto:evixixixi@gmail.com">evixixixi@gmail.com</a></p>
       <p><strong>전화번호:</strong> 010-4047-5935</p>
-      <p><strong>인스타그램:</strong> <a href="https://instagram.com/tkxkdsusu" target="_blank">@tkxksusu</a></p>
+      <p><strong>인스타그램:</strong> <a href="https://instagram.com/tkxkdsusu" target="_blank">@tkxkdsusu</a></p>
     </div>
+
+    <h2>연락 폼</h2>
+    <form action="mailto:evixixixi@gmail.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="이름" required>
+      <input type="email" name="email" placeholder="이메일 주소" required>
+      <textarea name="message" placeholder="메시지를 입력해주세요." required></textarea>
+      <button type="submit">보내기</button>
+    </form>
+
     <a href="portfolio.html" class="button">← 메인으로 돌아가기</a>
   </main>
 </body>
