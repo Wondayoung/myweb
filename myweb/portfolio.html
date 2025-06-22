@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>원다영 포트폴리오</title>
+  <!-- Google Font 추가 -->
+  <link href="https://fonts.googleapis.com/css2?family=SUIT:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #2c5f2d;
@@ -11,220 +13,408 @@
       --bg-light: #f0f7f4;
       --text-dark: #1b3a2d;
       --accent-light: #e1f0e9;
+      --shadow-dark: rgba(0,0,0,0.12);
+      --shadow-darker: rgba(0,0,0,0.25);
+      --hover-glow: 0 0 12px var(--secondary-color);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background: var(--bg-light);
+      font-family: 'SUIT', 'Noto Sans KR', sans-serif;
+      background: linear-gradient(135deg, #d9f0d9 0%, #f0f7f4 100%);
       color: var(--text-dark);
       scroll-behavior: smooth;
-      line-height: 1.6;
+      line-height: 1.7;
+      transition: background 0.4s ease, color 0.4s ease;
+      padding-top: 72px;
+      letter-spacing: 0.03em;
     }
-    a { text-decoration: none; color: inherit; }
-    img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: var(--secondary-color);
+    }
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow-dark);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: var(--hover-glow);
+    }
+
+    /* Fade-up 애니메이션 */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     header {
       background: var(--primary-color);
       position: fixed;
-      top: 0; width: 100%;
-      z-index: 100;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 4px 16px var(--shadow-darker);
+      border-bottom: 3px solid var(--secondary-color);
+      backdrop-filter: saturate(180%) blur(12px);
     }
     .container {
-      width: 90%; max-width: 1200px;
+      width: 90%;
+      max-width: 1200px;
       margin: 0 auto;
     }
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 60px;
+      height: 72px;
     }
     .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.75rem;
+      font-weight: 900;
       color: #fff;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      transition: color 0.3s ease;
+    }
+    .logo:hover {
+      color: var(--secondary-color);
+      text-shadow: 0 0 12px var(--secondary-color);
     }
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 1.5rem;
+      gap: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
     }
     .nav-links li a {
-      font-size: 0.95rem;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      border-radius: 0.25rem;
-      transition: background 0.3s;
+      color: #f0f7f4;
+      padding: 0.5rem 1.2rem;
+      border-radius: 0.35rem;
+      position: relative;
+      text-transform: uppercase;
+      transition: color 0.3s ease, background 0.3s ease;
     }
-    .nav-links li a:hover {
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      width: 0%;
+      height: 3px;
       background: var(--secondary-color);
+      border-radius: 2px;
+      transform: translateX(-50%);
+      transition: width 0.35s ease;
+    }
+    .nav-links li a:hover,
+    .nav-links li a:focus {
+      color: var(--secondary-color);
+      background: rgba(76,154,42,0.15);
+    }
+    .nav-links li a:hover::after,
+    .nav-links li a:focus::after {
+      width: 60%;
     }
 
     .hero {
-      margin-top: 60px;
-      padding: 2rem 1rem;
-      background: var(--accent-light);
+      margin-top: 0;
+      padding: 3rem 1rem 4rem;
+      background: #f7fff7;
+      box-shadow: inset 0 -3rem 4rem -3rem rgba(76,154,42,0.15);
+      border-radius: 16px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      height: 600px;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      height: 640px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #d9f0d9 0%, #f0f7f4 100%);
+      box-shadow: 0 12px 32px -6px rgba(76,154,42,0.3);
+      transition: box-shadow 0.3s ease;
     }
-    .hero-left img, .hero-right a img {
-      border-radius: 0.75rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    .hero-layout:hover {
+      box-shadow: 0 20px 48px -4px rgba(76,154,42,0.5);
+    }
+    .hero-left {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      cursor: pointer;
+      box-shadow: 0 12px 32px -8px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s ease;
+    }
+    .hero-left:hover {
+      box-shadow: 0 24px 48px -8px rgba(76,154,42,0.6);
+    }
+    .hero-left img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: transform 0.4s ease;
+    }
+    .hero-left:hover img {
+      transform: scale(1.08);
+    }
+    .hero-left::after {
+      content: '프로젝트 ASTRO 보기 →';
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.4rem;
+      background: rgba(44, 95, 45, 0.85);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(44,95,45,0.6);
+      letter-spacing: 0.08em;
+      user-select: none;
     }
     .hero-right {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.5rem;
+      border-radius: 16px;
+      overflow: hidden;
     }
     .hero-right a {
       flex: 1;
       overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 10px 26px -10px rgba(76,154,42,0.25);
+      transition: box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+    .hero-right a:hover {
+      box-shadow: 0 16px 38px -8px rgba(76,154,42,0.45);
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: transform 0.4s ease;
+    }
+    .hero-right a:hover img {
+      transform: scale(1.07);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .hero-layout {
         grid-template-columns: 1fr;
         height: auto;
       }
       .hero-right {
         flex-direction: row;
-        gap: 1rem;
       }
       .hero-right a {
-        flex: 1;
         height: 200px;
       }
     }
 
     section {
-      padding: 4rem 0;
+      padding: 5rem 0 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      scroll-margin-top: 80px;
     }
-    .about .inner {
-      max-width: 800px;
-      margin: 3rem auto 0;
-      text-align: center;
-    }
-    .about h2, .abilities h2, .projects h2 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
+    h2 {
+      font-size: 2.75rem;
+      font-weight: 900;
+      margin-bottom: 3rem;
       color: var(--primary-color);
+      letter-spacing: 0.1em;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
     }
 
     .abilities-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: center;
       list-style: none;
     }
     .abilities-list li a {
       display: block;
       background: #fff;
-      border: 2px solid var(--secondary-color);
+      border: 3px solid var(--secondary-color);
       color: var(--secondary-color);
-      padding: 0.75rem 1.5rem;
-      border-radius: 2rem;
-      font-size: 0.95rem;
-      font-weight: 500;
-      transition: background 0.3s, color 0.3s;
+      padding: 1rem 2.2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      box-shadow: 0 4px 18px rgba(76,154,42,0.3);
+      transition: all 0.4s ease;
+      cursor: pointer;
     }
     .abilities-list li a:hover {
       background: var(--secondary-color);
       color: #fff;
+      box-shadow: 0 0 18px var(--secondary-color);
+      transform: scale(1.1);
     }
 
     .carousel-wrapper {
       position: relative;
+      margin-top: 2rem;
+      padding-bottom: 2rem;
     }
     .projects-carousel {
       display: flex;
       overflow-x: auto;
       scroll-behavior: smooth;
-      gap: 1rem;
-      padding-bottom: 1rem;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--secondary-color) transparent;
+      border-radius: 20px;
     }
     .projects-carousel::-webkit-scrollbar {
-      height: 8px;
+      height: 10px;
+    }
+    .projects-carousel::-webkit-scrollbar-track {
+      background: transparent;
     }
     .projects-carousel::-webkit-scrollbar-thumb {
       background: var(--secondary-color);
-      border-radius: 4px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 4px rgba(255,255,255,0.2);
     }
+
+    /* 화살표 버튼 스타일 변경 */
     .prev-btn, .next-btn {
       position: absolute;
-      top: 40%;
+      top: 50%;
       transform: translateY(-50%);
-      background-color: var(--primary-color);
-      color: white;
+      width: 56px;
+      height: 56px;
+      background: var(--primary-color);
+      color: #fff;
       border: none;
-      padding: 0.5rem 1rem;
-      font-size: 1.5rem;
+      border-radius: 50%;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
       cursor: pointer;
-      z-index: 10;
-      border-radius: 6px;
+      transition: background 0.35s, transform 0.35s, box-shadow 0.35s;
+      z-index: 20;
+      user-select: none;
     }
+    .prev-btn { left: 8px; }
+    .next-btn { right: 8px; }
     .prev-btn:hover, .next-btn:hover {
-      background-color: var(--secondary-color);
+      background: #fff;
+      color: var(--primary-color);
+      box-shadow: 0 0 18px var(--secondary-color);
+      transform: translateY(-50%) scale(1.15);
     }
-    .prev-btn { left: -10px; }
-    .next-btn { right: -10px; }
 
     .card {
-      min-width: 280px;
+      min-width: 320px;
       background: #fff;
-      border-radius: 0.75rem;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.3s;
+      box-shadow: 0 10px 26px rgba(76,154,42,0.15);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      cursor: pointer;
+      will-change: transform;
     }
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-12px) scale(1.05);
+      box-shadow: 0 16px 38px rgba(76,154,42,0.4);
     }
     .card img {
-      width: 100%;
-      height: 160px;
+      height: 180px;
       object-fit: cover;
+      filter: brightness(98%);
+      transition: filter 0.3s ease, transform 0.3s ease;
+      border-radius: 18px 18px 0 0;
+    }
+    .card:hover img {
+      filter: brightness(110%);
+      transform: scale(1.08);
     }
     .card-content {
-      padding: 1rem;
+      padding: 1.2rem 1.6rem;
+      text-align: left;
     }
     .card-content h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-dark);
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+      color: var(--primary-color);
+      letter-spacing: 0.03em;
     }
     .card-content p {
-      font-size: 0.9rem;
-      color: #555;
+      font-size: 1rem;
+      color: #3a3a3a;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
     }
 
     footer {
-      background: var(--primary-color);
+      background: linear-gradient(90deg, #2c5f2d, #4c9a2a);
       color: #fff;
       text-align: center;
-      padding: 2rem 0;
+      padding: 2.5rem 1rem;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      user-select: none;
+      box-shadow: inset 0 6px 10px rgba(255,255,255,0.12);
     }
     footer small {
-      margin-top: 0.5rem;
       display: block;
-      font-size: 0.8rem;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: #c9dfc9;
+      font-weight: 400;
+      letter-spacing: 0.03em;
     }
   </style>
 </head>
 <body>
-  <header>
+  <header class="fade-up">
     <div class="container">
       <nav>
-        <div class="logo">원다영</div>
+        <!-- 로고 클릭 시 about.html로 이동 -->
+        <a href="about.html" class="logo">원다영</a>
         <ul class="nav-links">
           <li><a href="about.html">About</a></li>
           <li><a href="#abilities">Skills</a></li>
@@ -235,7 +425,7 @@
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero fade-up">
     <div class="hero-layout">
       <div class="hero-left">
         <a href="project-astro.html"><img src="1.jpg" alt="메인 큰 배너 이미지"></a>
@@ -247,7 +437,7 @@
     </div>
   </section>
 
-  <section id="abilities" class="abilities">
+  <section id="abilities" class="abilities fade-up">
     <div class="container">
       <h2>Skills</h2>
       <ul class="abilities-list">
@@ -259,14 +449,14 @@
     </div>
   </section>
 
-  <section id="projects" class="projects">
+  <section id="projects" class="projects fade-up">
     <div class="container">
       <h2>Projects</h2>
       <div class="carousel-wrapper">
         <button class="prev-btn" aria-label="이전">&lt;</button>
         <div class="projects-carousel" id="carousel">
 
-          <a href="project-logo.html" class="card">
+          <a href="project-logo.html" class="card fade-up">
             <img src="5.png" alt="로고 디자인 썸네일">
             <div class="card-content">
               <h3>로고 디자인</h3>
@@ -274,7 +464,7 @@
             </div>
           </a>
 
-          <a href="project-illustration.html" class="card">
+          <a href="project-illustration.html" class="card fade-up">
             <img src="2.jpg" alt="일러스트 캐릭터 썸네일">
             <div class="card-content">
               <h3>일러스트 캐릭터 드로잉</h3>
@@ -282,7 +472,7 @@
             </div>
           </a>
 
-          <a href="project-appcontent.html" class="card">
+          <a href="project-appcontent.html" class="card fade-up">
             <img src="포폴 어플-21.jpg" alt="앱 콘텐츠 썸네일">
             <div class="card-content">
               <h3>앱 콘텐츠 디자인</h3>
@@ -290,7 +480,7 @@
             </div>
           </a>
 
-          <a href="project-character.html" class="card">
+          <a href="project-character.html" class="card fade-up">
             <img src="로고 캐디 아웃박스 수정_대지 1-02.jpg" alt="캐릭터 디자인 썸네일">
             <div class="card-content">
               <h3>캐릭터 디자인</h3>
@@ -298,7 +488,7 @@
             </div>
           </a>
 
-          <a href="project-branding.html" class="card">
+          <a href="project-branding.html" class="card fade-up">
             <img src="extra1.png" alt="브랜딩 디자인 썸네일">
             <div class="card-content">
               <h3>브랜딩 디자인</h3>
@@ -306,7 +496,7 @@
             </div>
           </a>
 
-          <a href="project-print.html" class="card">
+          <a href="project-print.html" class="card fade-up">
             <img src="extra2.png" alt="인쇄물 디자인 썸네일">
             <div class="card-content">
               <h3>인쇄물 디자인</h3>
@@ -320,10 +510,10 @@
     </div>
   </section>
 
-  <footer>
+  <footer class="fade-up">
     <div class="container">
       © 2025 원다영. All Rights Reserved.
-    
+      <small>Made by 다영</small>
     </div>
   </footer>
 
@@ -331,10 +521,10 @@
     document.addEventListener('DOMContentLoaded', function () {
       const carousel = document.getElementById('carousel');
       document.querySelector('.prev-btn').addEventListener('click', () => {
-        carousel.scrollBy({ left: -300, behavior: 'smooth' });
+        carousel.scrollBy({ left: -320, behavior: 'smooth' });
       });
       document.querySelector('.next-btn').addEventListener('click', () => {
-        carousel.scrollBy({ left: 300, behavior: 'smooth' });
+        carousel.scrollBy({ left: 320, behavior: 'smooth' });
       });
     });
   </script>
